@@ -44,7 +44,18 @@ app.post('/students', validateEstudent, (req, res) => {
     students.push(newStudent);
     res.status(201).json({ mensaje: 'Estudiante agregado con éxito', Estudiante: newStudent });
 });
+app.put('/students/:id', validateEstudent, (req, res) => {
+    const id = parseInt(req.params.id);
+    const { fullName, age, curse } = req.body;
 
+    const studentIndex = students.findIndex((e) => e.id === id);
+    if (studentIndex !== -1) {
+        students[studentIndex] = { id, fullName, age, curse };
+        res.status(200).json({ mensaje: 'Datos del estudiante actualizados con éxito'});
+    } else {
+        res.status(404).json({ mensaje: 'Estudiante no encontrado' });
+    }
+});
 
 app.listen(4321, () => {
     console.log('Servidor corriendo en el puerto 4321');
