@@ -56,6 +56,16 @@ app.put('/students/:id', validateEstudent, (req, res) => {
         res.status(404).json({ mensaje: 'Estudiante no encontrado' });
     }
 });
+app.delete('/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const studentIndex = students.findIndex((e) => e.id === id);
+    if (studentIndex === -1) {
+        res.status(404).json({ mensaje: 'El estudiante que quiere eliminar no fue encontrado' });
+    } else {
+        const [deleteStudent] = students.splice(studentIndex, 1);
+        res.status(200).json({ mensaje: 'Estudiante borrado correctamente' });
+    }
+});
 
 app.listen(4321, () => {
     console.log('Servidor corriendo en el puerto 4321');
