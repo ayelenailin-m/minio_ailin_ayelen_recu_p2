@@ -23,9 +23,9 @@ app.get('/students/:id', (req, res) => {
 const validateEstudent = (req, res, next) => {
     const { fullName, age, curse } = req.body;
 
-    if (typeof fullName !== 'string' || fullName === '' || !Number.isInteger(age) || age < 11 || age > 20 || typeof curse !== 'string' || curse === '') {
+    if (typeof fullName !== 'string' || fullName === '' || !Number.isInteger(age) || age < 6 || age > 99 || typeof curse !== 'string' || curse === '') {
         return res.status(400).json({
-            mensaje: "Datos inválidos. 'fullName' y 'curse' deben ser una cadena de texto no vacía, 'age' debe ser un número entero entre 11 y 20."
+            mensaje: "Datos inválidos. 'fullName' y 'curse' deben ser una cadena de texto no vacía, 'age' debe ser un número entero entre 6 y 99."
         });
     }
     req.body.fullName = fullName.trim();
